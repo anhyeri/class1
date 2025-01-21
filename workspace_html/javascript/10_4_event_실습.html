@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #char {
+            border: 1px solid black;
+            width: 200px;
+
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <img id ="char" src="https://png.pngtree.com/png-clipart/20240627/original/pngtree-cute-white-puppy-png-image_15426002.png">
+    
+    <script>
+        let left2 = 0;
+        let step = 10;
+        document.querySelector('#char').style.left = left2 +'px'
+        addEventListener('keydown', function(event){
+            console.log(event.keyCode)
+            //오른쪽 방향키
+            if(event.keyCode == 39){
+                console.log(document.querySelector('#char').style.left)
+
+                left2 += step
+                document.querySelector('#char').style.left = left2 + 'px'
+            }
+        })
+    </script>
+
+</body>
+</html>

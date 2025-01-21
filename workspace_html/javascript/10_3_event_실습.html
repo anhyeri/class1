@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #menu {
+            display: flex;
+            border: 1px solid blue;
+        }
+        #menu div {
+            flex-grow: 1;
+            border:1px color(red);
+        }
+        #content {
+            border: 1 solid red;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id = "content">
+        <div id="content1" class = "">About 내용</div>
+        <div id="content2" class = "hide">Product 내용</div>
+        <div id="content3" class = "hide">Technology 내용</div>
+        <div id="content4" class = "hide">Download 내용</div>
+    </div>
+    <div id = "menu">
+        <div data-view = "content1">
+            About
+        </div>
+        <div data-view = "content2">Product</div>
+        <div data-view = "content3">Technology</div>
+        <div data-view = "content4">Download</div>
+    <script>
+        // 큰 박스 아래 카테고리 네 개
+        // 카테고리 하나 선택할 때마다 큰 박스의 내용이 달라지게
+        document.querySelector("#menu")
+        .addEventListener('click',function(evt){
+            console.log(evt.target.textContent)
+            console.log(evt.target.getAttribute('data-topping'))
+            console.log(evt.target.getAttribute('data-view'))
+
+            let id = evt.target.getAttribute('data-view')
+            console.log(document.querySelector('#'+id))
+
+
+            const content = document.querySelectorAll("[id^=content]:not(#content)")
+            
+            for(let i = 0; i<content.length; i++){
+                content[i].classList.add('hide');
+            }
+
+            document.querySelector("#"+id).classList.remove('hide');
+        })
+    </script>
+    </div>
+
+</body>
+</html>

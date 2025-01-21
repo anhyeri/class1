@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>밀키트 생산 과정 MES</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #fff;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0; /* 여백을 줄여서 붙어 있게 함 */
+            text-align: left; /* 왼쪽 정렬 */
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #e6f0ff;
+        }
+
+        .favorite {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 18px;
+            background-color: #d9e6ff;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .sub-menu {
+            max-height: 0; /* 기본적으로 숨김 */
+            overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+            transition: max-height 0.3s ease; /* 애니메이션 효과 */
+            padding-left: 20px; /* 들여쓰기 */
+            margin-top: 5px;
+            font-size: 14px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #007bff;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .sub-menu.open {
+            max-height: 200px; /* 열릴 때의 최대 높이 */
+        }
+
+        .sub-menu li {
+            margin: 5px 0;
+        }
+
+        .sub-menu li a {
+            color: #0056b3;
+        }
+
+        .sub-menu li a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .content {
+        padding: 20px;
+        background-color: #f4f4f9;
+        position: relative; /* 자식 요소를 절대 위치로 설정하기 위해 relative로 설정 */
+        }
+
+        .profile-container {
+            position: absolute; /* 프로필 이미지를 절대 위치로 설정 */
+            top: 20px; /* 상단 여백 */
+            right: 20px; /* 오른쪽 여백 */
+        }
+
+        .profile-image {
+            width: 50px; /* 프로필 이미지 너비 */
+            height: 50px; /* 프로필 이미지 높이 */
+            border-radius: 50%; /* 둥글게 만들기 */
+            border: 2px solid #007bff; /* 테두리 색상 */
+        }
+
+        .notice {
+            background-color: #ffffff; /* 공지사항 배경색 */
+            border: 1px solid #ddd; /* 경계선 */
+            border-radius: 5px; /* 모서리 둥글게 */
+            padding: 15px; /* 내부 여백 */
+            margin-bottom: 15px; /* 항목 간의 여백 */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+        }
+
+        .notice h3 {
+            margin: 0 0 10px; /* 제목 마진 조정 */
+            font-size: 18px; /* 제목 폰트 크기 */
+            color: #333; /* 제목 색상 */
+        }
+
+        .notice p {
+            margin: 0; /* 본문 마진 조정 */
+            color: #666; /* 본문 색상 */
+        }
+        .board-preview {
+        display: grid; /* 그리드 레이아웃 사용 */
+        grid-template-columns: repeat(3, 1fr); /* 3열로 구성 */
+        gap: 15px; /* 박스 간격 */
+        margin-top: 20px; /* 공지사항과의 간격 */
+        }
+
+        .board-item {
+        position: relative; /* 자식 요소의 절대 위치를 위한 상대 위치 설정 */
+        background-color: #ffffff; /* 박스 배경색 */
+        border: 1px solid #ddd; /* 경계선 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        padding: 20px; /* 내부 여백 */
+        text-align: left; /* 텍스트 왼쪽 정렬 */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    }
+
+    .more-button {
+        position: absolute; /* 버튼을 절대 위치로 설정 */
+        top: 10px; /* 상단 여백 */
+        right: 10px; /* 오른쪽 여백 */
+        background-color: #007bff; /* 버튼 배경색 */
+        color: white; /* 버튼 글자색 */
+        border: none; /* 경계선 제거 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        padding: 5px 10px; /* 내부 여백 */
+        cursor: pointer; /* 커서 모양 변경 */
+        transition: background-color 0.3s; /* 배경색 전환 효과 */
+    }
+
+    .more-button:hover {
+        background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+    }
+    .board-item h4 {
+    margin: 0 0 10px; /* 제목 아래 여백 */
+    font-size: 18px; /* 제목 폰트 크기 */
+    color: #333; /* 제목 색상 */
+    border-bottom: 2px solid #007bff; /* 제목 아래 경계선 추가 */
+    padding-bottom: 5px; /* 제목 아래 여백 */
+    }
+
+    .content {
+        margin: 0; /* 본문 마진 조정 */
+        color: #666; /* 본문 색상 */
+        font-size: 14px; /* 본문 폰트 크기 */
+    }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>(주)HH</h2>
+        <ul>
+            <li class="favorite"><a href="#favorites">즐겨찾기</a></li>
+            <li>
+                <a href="#material-management" class="toggle">자재관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#in-out">입/출고</a></li>
+                    <li><a href="#inventory">재고</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#quality-management" class="toggle">품질관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#defect-management">불량관리</a></li>
+                    <li><a href="#lot-management">Lot 관리</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#work-management" class="toggle">작업관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#work-order-view">작업지시서view</a></li>
+                    <li><a href="#work-register">작지 등록</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#production-management" class="toggle">생산관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#production-status">생산 현황</a></li>
+                    <li><a href="#nonconformity-status">부적합 현황</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#production-report" class="toggle">생산 report</a>
+                <ul class="sub-menu">
+                    <li><a href="#performance-status">실적 현황</a></li>
+                    <li><a href="#product-production-status">제품 생산 현황</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#board" class="toggle">게시판</a>
+                <ul class="sub-menu">
+                    <li><a href="#notices">공지사항</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#settings" class="toggle">관리 / 설정</a>
+                <ul class="sub-menu">
+                    <li><a href="#account-management">계정 관리</a></li>
+                    <li><a href="#transaction-history">출하 후 거래 내역 관리</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="profile-container">
+            <img src="https://cdn.discordapp.com/attachments/1331086291516919959/1331158662214975529/default_profile.png?ex=6790999c&is=678f481c&hm=e6ca836de1d9a9dee1fdbcb82668a4a9cd2b0b107f1c3b3ecad1d5c15465daa1&" class="profile-image">
+        </div>
+        <div class="content">
+            <div class="profile-container">
+                <img src="https://cdn.discordapp.com/attachments/1331086291516919959/1331158662214975529/default_profile.png?ex=6790999c&is=678f481c&hm=e6ca836de1d9a9dee1fdbcb82668a4a9cd2b0b107f1c3b3ecad1d5c15465daa1&" class="profile-image">
+            </div>
+        
+            <h2>공지사항</h2>
+            <div class="notice">
+                <h3>2025년 1월 21일</h3>
+                <p>시스템 업데이트가 완료되었습니다. 사용자 인터페이스가 개선되었습니다.</p>
+            </div>
+            <div class="notice">
+                <h3>2025년 1월 15일</h3>
+                <p>1월 25일 정기 점검이 예정되어 있습니다. 시스템 사용에 유의해 주세요.</p>
+            </div>
+            <div class="notice">
+                <h3>2025년 1월 10일</h3>
+                <p>2월부터 새로운 자재 관리 시스템이 도입됩니다. 교육 일정은 추후 공지 예정입니다.</p>
+            </div>
+        
+
+            <div class="board-preview">
+                <div class="board-item">
+                    <button class="more-button" onclick="location.href='생산현황.html'">더보기</button>
+                    <h4>생산 현황</h4>
+                    <p>현재 생산량: 500개</p>
+                    <p>목표 생산량: 1000개</p>
+                </div>
+                <div class="board-item">
+                    <button class="more-button" onclick="location.href='부적합현황.html'">더보기</button>
+                    <h4>부적합 현황</h4>
+                    <p>총 부적합 수량: 10개</p>
+                    <p>부적합 원인: 생산 과정 오류</p>
+                </div>
+                <div class="board-item">
+                    <button class="more-button" onclick="location.href='작업지시서.html'">더보기</button>
+                    <h4>작업지시서</h4>
+                    <p>작업 상태: 진행 중</p>
+                    <p>예정 완료일: 2025년 1월 30일</p>
+                </div>
+            </div>
+            <div class="board-preview">
+                <div class="board-item">
+                    <button class="more-button" onclick="location.href='불량보고.html'">더보기</button>
+                    <h4>불량 보고</h4>
+                    <p>최근 불량률: 2%</p>
+                    <p>조치 사항: 생산 라인 점검</p>
+                </div>
+                <div class="board-item">
+                    <button class="more-button" onclick="location.href='재고현황.html'">더보기</button>
+                    <h4>재고 현황</h4>
+                    <p>현재 재고: 200개</p>
+                    <p>최소 재고: 50개</p>
+                </div>
+                <div class="board-item">
+                    <button class="more-button" onclick="location.href='자재요청.html'">더보기</button>
+                    <h4>자재 요청</h4>
+                    <p>요청 자재: 원자재 A</p>
+                    <p>요청 수량: 1000kg</p>
+                </div>
+            </div>
+        </div>
+        
+    
+    
+    
+
+    <script>
+        // 각 카테고리 클릭 시 세부 메뉴 토글
+        const toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault(); // 링크 기본 동작 방지
+                const subMenu = toggle.nextElementSibling;
+                subMenu.classList.toggle('open'); // open 클래스를 토글
+                
+                // 애니메이션 효과를 위해 max-height 조정
+                if (subMenu.classList.contains('open')) {
+                    subMenu.style.maxHeight = subMenu.scrollHeight + "px"; // 내용 높이에 맞게 설정
+                } else {
+                    subMenu.style.maxHeight = "0"; // 숨김
+                }
+            });
+        });
+    </script>
+</body>
+</html>

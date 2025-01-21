@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입출고 관리 - 밀키트 생산 MES</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #fff;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0; /* 여백을 줄여서 붙어 있게 함 */
+            text-align: left; /* 왼쪽 정렬 */
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #e6f0ff;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .table-container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>(주)HH</h2>
+        <ul>
+            <li class="favorite"><a href="#favorites">즐겨찾기</a></li>
+            <li>
+                <a href="#material-management" class="toggle">자재관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#in-out">입/출고</a></li>
+                    <li><a href="#inventory">재고</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#quality-management" class="toggle">품질관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#defect-management">불량관리</a></li>
+                    <li><a href="#lot-management">Lot 관리</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#work-management" class="toggle">작업관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#work-order-view">작업지시서view</a></li>
+                    <li><a href="#work-register">작지 등록</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#production-management" class="toggle">생산관리</a>
+                <ul class="sub-menu">
+                    <li><a href="#production-status">생산 현황</a></li>
+                    <li><a href="#nonconformity-status">부적합 현황</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#production-report" class="toggle">생산 report</a>
+                <ul class="sub-menu">
+                    <li><a href="#performance-status">실적 현황</a></li>
+                    <li><a href="#product-production-status">제품 생산 현황</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#board" class="toggle">게시판</a>
+                <ul class="sub-menu">
+                    <li><a href="#notices">공지사항</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#settings" class="toggle">관리 / 설정</a>
+                <ul class="sub-menu">
+                    <li><a href="#account-management">계정 관리</a></li>
+                    <li><a href="#transaction-history">출하 후 거래 내역 관리</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>입출고 관리</h1>
+            <button class="btn" onclick="location.href='입출고등록.html'">입출고 등록</button>
+        </div>
+
+        <div class="table-container">
+            <h2>입출고 내역</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>일자</th>
+                        <th>자재명</th>
+                        <th>입고량</th>
+                        <th>출고량</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025-01-20</td>
+                        <td>원자재 A</td>
+                        <td>200kg</td>
+                        <td>-</td>
+                        <td>입고 완료</td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-21</td>
+                        <td>원자재 B</td>
+                        <td>-</td>
+                        <td>50kg</td>
+                        <td>출고 완료</td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-22</td>
+                        <td>원자재 C</td>
+                        <td>100kg</td>
+                        <td>-</td>
+                        <td>입고 완료</td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-23</td>
+                        <td>원자재 A</td>
+                        <td>-</td>
+                        <td>30kg</td>
+                        <td>출고 완료</td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-24</td>
+                        <td>원자재 B</td>
+                        <td>150kg</td>
+                        <td>-</td>
+                        <td>입고 완료</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // 각 카테고리 클릭 시 세부 메뉴 토글
+        const toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault(); // 링크 기본 동작 방지
+                const subMenu = toggle.nextElementSibling;
+                subMenu.classList.toggle('open'); // open 클래스를 토글
+                
+                // 애니메이션 효과를 위해 max-height 조정
+                if (subMenu.classList.contains('open')) {
+                    subMenu.style.maxHeight = subMenu.scrollHeight + "px"; // 내용 높이에 맞게 설정
+                } else {
+                    subMenu.style.maxHeight = "0"; // 숨김
+                }
+            });
+        });
+    </script>
+</body>
+</html>

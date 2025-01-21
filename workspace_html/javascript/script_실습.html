@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'NoonnuBasicGothicRegular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noon-2410@1.0/NoonnuBasicGothicRegular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'NoonnuBasicGothicRegular'
+        }
+        .page {
+            background-color: pink;  
+        
+        }
+        .film {
+            height: 40vh;
+            background-color: pink;
+            padding: 0;
+            text-align: center;
+            
+        }
+        .filmimg {
+            display: inline-block;
+            width: 200px;
+            height:100px;
+            margin-right: 50px;
+            padding: 15px;
+            text-align: center;
+            
+        }
+        .filmimg img{
+            width: 130%;
+            height: auto;
+
+        }
+        h4 {
+            width: 260px;
+        }
+
+        .filmstory{
+            display: block;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid indianred;
+            background-color: pink;
+
+        }
+        .content {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- 영화 댓글 별점 관리 사이트
+    영화는 3개 이상 (+ 영화 추가, 수정, 삭제)
+    영화 클릭 시 상세 정보 표시
+    댓글 + 별점 추가 UI
+    댓글 + 별점 표시 + 삭제 버튼 (+수정 버튼) 
+    
+    썸네일로 사용할 이미지 4장
+    클릭 시 영화 썸네일 위쪽 고정, 영화 설명 아래쪽
+    그 아래쪽에 댓글창 / 별점 (별 5개) + 등록 버튼
+    그 아래쪽에 댓글 내역들 여러개 있는 창
+
+    별점 - span 사용해서 클릭이벤트 줘도 되고
+            이미지를 넣어서 클릭 이벤트로 진행
+    -->
+    <div class="page">
+        <div class ='logo'><h1>Movie</h1></div>
+    
+        <div class ='film'>
+            <!-- 센과 치히로의 행방불명 -->
+            <div class = 'filmimg fa' data-view = 'sen'> <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABWqpFy4Lw4KsGdKHkE86IpMVh1I6xxvx41VcFzhqRmqTxhRYzG8QhOq8OD8MbI0IiDyzVwlOcpiO0xFLdLo_6fV9naiZH6BFiTY.webp?r=161"> 
+                <div class = 'filmname'><h4>센과 치히로의 행방불명</h4></div>
+            </div>
+            <!-- 극한직업 -->
+            <div class = 'filmimg fb' data-view = 'chicken'> <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABXF1zR2nZgZyYIfUj1rJdUeEeVhv8mtdMYuKAPgC50WCt3ig1tDSooAO4Y-4eKlAkksSA3qlGh-7yXMErOEOcPkpTCKxPKvcCvM.webp?r=7c4"> 
+                <div class = 'filmname'><h4>극한직업</h4></div>
+            </div>
+            <!-- 파묘 -->
+            <div class = 'filmimg fc' data-view = 'ghost'> <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABQmuKJkHi4aSHeS_0je7V7NwXL9UvKpbr8kuklbsgkxv1NDrZ7n02yrJ8w5PKullQNH4s4lRnJW3xc8HWqCugrYbl62iBJSCJ70.webp?r=25e"> 
+                <div class = 'filmname'><h4>파묘</h4></div>
+            </div>
+            <!-- 내안의 그놈 -->
+            <div class = 'filmimg fd' data-view = 'who'> <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABbZHWF3EiYe_ffCYd_zOtEt2r5MyCOIsgJPwYeIPfKmSu3FYeSlC8GNkcF-EB6UsbJrxdXmG_ZVd5xlYGRIqQ3HGmdIyJfaXzqA.webp?r=a98">
+                <div class = 'filmname'><h4>내안의 그놈</h4></div>
+            </div>
+        </div>
+    </div>
+
+    <div id = 'filmstory' >
+        <div id="sen" class = "content">
+            <h3>센과 치히로의 행방불명</h3>
+            <h5>금지된 세계의 문이 열렸다!
+            이사 가던 날, 수상한 터널을 지나자 인간에게는 금지된 신들의 세계로 오게 된 치히로...
+            신들의 음식을 먹은 치히로의 부모님은 돼지로 변해버린다.
+            
+            “걱정마, 내가 꼭 구해줄게…”
+            겁에 질린 치히로에게 다가온 정체불명의 소년 하쿠.
+            그의 따뜻한 말에 힘을 얻은 치히로는
+            인간 세계로 돌아가기 위해 사상 초유의 미션을 시작하는데…
+        </h5>
+        </div>
+
+        <div id = "chicken" class = "content">
+            <h3>극한직업</h3>
+            <h5>낮에는 치킨장사! 밤에는 잠복근무!
+            지금까지 이런 수사는 없었다!
+
+            불철주야 달리고 구르지만 실적은 바닥, 급기야 해체 위기를 맞는 마약반!
+            더 이상 물러설 곳이 없는 팀의 맏형 고 반장(류승룡)은 국제 범죄조직의 국내 마약 밀반입 정황을 포착하고
+            장 형사(이하늬), 마 형사(진선규), 영호(이동휘), 재훈(공명)까지 4명의 팀원들과 함께 잠복 수사에 나선다.
+            마약반은 24시간 감시를 위해 범죄조직의 아지트 앞 치킨집을 인수해 위장 창업을 하게 되고,
+            뜻밖의 절대미각을 지닌 마 형사의 숨은 재능으로 치킨집은 일약 맛집으로 입소문이 나기 시작한다.
+            수사는 뒷전, 치킨장사로 눈코 뜰 새 없이 바빠진 마약반에 어느 날 절호의 기회가 찾아오는데…
+
+            범인을 잡을 것인가, 닭을 잡을 것인가!</h5>
+        </div>
+
+        <div id = "ghost" class = "content"> 
+            <h3>파묘</h3>
+            <h5>미국 LA, 거액의 의뢰를 받은 무당 ‘화림’(김고은)과 ‘봉길’(이도현)은
+                기이한 병이 대물림되는 집안의 장손을 만난다.
+                조상의 묫자리가 화근임을 알아챈 ‘화림’은 이장을 권하고,
+                돈 냄새를 맡은 최고의 풍수사 ‘상덕’(최민식)과 장의사 ‘영근’(유해진)이 합류한다.
+                
+                “전부 잘 알 거야… 묘 하나 잘못 건들면 어떻게 되는지”
+                
+                절대 사람이 묻힐 수 없는 악지에 자리한 기이한 묘.
+                ‘상덕’은 불길한 기운을 느끼고 제안을 거절하지만,
+                ‘화림’의 설득으로 결국 파묘가 시작되고….
+                
+                나와서는 안될 것이 나왔다.</h5>
+        </div>
+
+        <div id = "who" class = "content"> 
+            <h3>내안의 그놈</h3>
+            <h5>제대로 바뀐 아재와 고딩,
+                웃음 대환장 파티!
+                
+                옥상에서 떨어진 고등학생 동현(진영)이 길을 가던 엘리트 아재 판수(박성웅)를 덮치면서 제대로 바뀐다!? 게다가 판수는 동현의 몸으로 첫사랑 미선(라미란)과 존재도 몰랐던 딸 현정(이수민)을 만나게 되는데...
+                
+                대유잼의 향연,
+                넌 이미 웃고 있다!</h5>    
+        </div>
+
+    </div>
+    
+    <div class = "score">
+        <input type="text" id = 'comment' placeholder="댓글을 입력하세요.">
+        <span class = "star" data-value="1">☆</span>
+        <span class = "star" data-value="2">☆</span>
+        <span class = "star" data-value="3">☆</span>
+        <span class = "star" data-value="4">☆</span>
+        <span class = "star" data-value="5">☆</span>
+        <button type="button" id = 'add'> 등록 </button>
+    </div>
+
+    <div class = "comment">
+        <ul id ="cmli"></ul>
+    </div>
+
+    
+    <script>
+        //센과 치히로
+        document.querySelector(".fa")
+            .addEventListener('click',function(evt){
+            console.log(1)
+            // fa에 클릭 이벤트가 나타나면 1을 출력
+            // 출력 확인
+            
+            let id = this.getAttribute('data-view')
+                console.log(id)
+            // id라는 변수에 data-view를 담고 그걸 출력
+            // id 출력 확인
+            
+            // 나타내고자 하는 설명만 content 지우기
+                sen.classList.remove('content')
+    
+            // sen 이라는 변수에 id = sen을 가지고 와서 담음
+            // sen에서 class content를 뺐다
+    
+            let chicken = document.querySelector("#"+chicken)
+            chicken.classList.add('content')
+            // 극한직업 설명 가리기
+    
+            let ghost = document.querySelector("#"+ghost)
+            ghost.classList.add('content')
+            // 파묘 설명 가리기
+            
+            let who = document.querySelector("#"+who)
+            who.classList.add('content')
+            // 내안의 그놈 설명 가리기
+            }) 
+    
+    
+        // 극한직업
+        document.querySelector(".fb")
+            .addEventListener('click',function(evt){
+            console.log(2)
+            // fb에 클릭 이벤트가 나타나면 1을 출력
+            // 출력 확인
+            
+            let id = this.getAttribute('data-view')
+            console.log(id)
+    
+            let chicken = document.querySelector("#"+id)
+                console.log(chicken)
+    
+                chicken.classList.remove('content')
+    
+                let sen = document.querySelector("#"+"sen")
+                sen.classList.add('content')
+    
+                let who = document.querySelector("#"+who)
+                who.classList.add('content')
+            })
+    
+            // 파묘
+            document.querySelector(".fc").addEventListener('click', function(evt) {
+            console.log(3);
+            let id = this.getAttribute('data-view');
+            console.log(id);
+    
+            let ghost = document.querySelector("#" + id);
+            ghost.classList.remove('content');
+    
+            let sen = document.querySelector("#sen");
+            sen.classList.add('content');
+    
+            let chicken = document.querySelector("#chicken");
+            chicken.classList.add('content');
+    
+            let who = document.querySelector("#who");
+            who.classList.add('content');
+        })
+            // 내안의 그놈
+            document.querySelector(".fd").addEventListener('click', function(evt) {
+            console.log(4);
+            let id = this.getAttribute('data-view');
+            console.log(id);
+    
+            let who = document.querySelector("#" + id);
+            who.classList.remove('content');
+    
+            let sen = document.querySelector("#sen");
+            sen.classList.add('content');
+    
+            let chicken = document.querySelector("#chicken");
+            chicken.classList.add('content');
+    
+            let ghost = document.querySelector("#ghost");
+            ghost.classList.add('content');
+        });
+    
+    </script>
+</body>
+</html>

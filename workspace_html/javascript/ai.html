@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 댓글 별점 관리 사이트</title>
+    <style>
+        @font-face {
+            font-family: 'NoonnuBasicGothicRegular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noon-2410@1.0/NoonnuBasicGothicRegular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'NoonnuBasicGothicRegular';
+        }
+        .page {
+            background-color: pink;  
+        }
+        .logo img {
+            width: 8%;
+            height: auto;
+        }
+        .film {
+            height: 40vh;
+            background-color: pink;
+            padding: 0;
+            text-align: center;
+        }
+        .filmimg {
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            margin-right: 50px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer; /* 클릭 가능하게 설정 */
+        }
+        .filmimg img {
+            width: 130%;
+            height: auto;
+        }
+        h4 {
+            width: 260px;
+        }
+        .content {
+            display: none; /* 처음에 모든 콘텐츠 숨김 */
+            padding: 15px;
+            text-align: center;
+            border: 1px solid indianred;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class='logo'>
+            <img src="https://cdn.discordapp.com/attachments/1309410679958012005/1327111026868748288/-001_1.png?ex=6781dff5&is=67808e75&hm=6837d627b42ebacbe84cda86ed9d640540bd25379036427b65f8b03dd1ec53ce&">
+        </div>
+        <div class='film'>
+            <div class='filmimg' data-view='filmimg1'>
+                <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABWqpFy4Lw4KsGdKHkE86IpMVh1I6xxvx41VcFzhqRmqTxhRYzG8QhOq8OD8MbI0IiDyzVwlOcpiO0xFLdLo_6fV9naiZH6BFiTY.webp?r=161"> 
+                <div class='filmname'><h4>센과 치히로의 행방불명</h4></div>
+            </div>
+            <div class='filmimg' data-view='filmimg2'>
+                <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABXF1zR2nZgZyYIfUj1rJdUeEeVhv8mtdMYuKAPgC50WCt3ig1tDSooAO4Y-4eKlAkksSA3qlGh-7yXMErOEOcPkpTCKxPKvcCvM.webp?r=7c4"> 
+                <div class='filmname'><h4>극한직업</h4></div>
+            </div>
+            <div class='filmimg' data-view='filmimg3'>
+                <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABQmuKJkHi4aSHeS_0je7V7NwXL9UvKpbr8kuklbsgkxv1NDrZ7n02yrJ8w5PKullQNH4s4lRnJW3xc8HWqCugrYbl62iBJSCJ70.webp?r=25e"> 
+                <div class='filmname'><h4>파묘</h4></div>
+            </div>
+            <div class='filmimg' data-view='filmimg4'>
+                <img src="https://occ-0-4958-993.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABbZHWF3EiYe_ffCYd_zOtEt2r5MyCOIsgJPwYeIPfKmSu3FYeSlC8GNkcF-EB6UsbJrxdXmG_ZVd5xlYGRIqQ3HGmdIyJfaXzqA.webp?r=a98">
+                <div class='filmname'><h4>내안의 그놈</h4></div>
+            </div>
+        </div>
+    </div>
+
+    <div id='filmimg1' class="content">
+        <h3>센과 치히로의 행방불명</h3>
+        <h5>금지된 세계의 문이 열렸다! 이사 가던 날, 수상한 터널을 지나자...</h5>
+    </div>
+    <div id='filmimg2' class="content">
+        <h3>극한직업</h3>
+        <h5>낮에는 치킨장사! 밤에는 잠복근무! 지금까지 이런 수사는 없었다!</h5>
+    </div>
+    <div id='filmimg3' class="content">
+        <h3>파묘</h3>
+        <h5>미국 LA, 거액의 의뢰를 받은 무당 ‘화림’과 ‘봉길’은...</h5>
+    </div>
+    <div id='filmimg4' class="content">
+        <h3>내안의 그놈</h3>
+        <h5>제대로 바뀐 아재와 고딩, 웃음 대환장 파티!</h5>
+    </div>
+
+    <div class="score">
+        <input type="text" id='comment' placeholder="댓글을 입력하세요.">
+        <span class="star" data-value="1">☆</span>
+        <span class="star" data-value="2">☆</span>
+        <span class="star" data-value="3">☆</span>
+        <span class="star" data-value="4">☆</span>
+        <span class="star" data-value="5">☆</span>
+        <button type="button" id='add'>등록</button>
+    </div>
+
+    <div class="comment">
+        <ul id="cmli"></ul>
+    </div>
+
+    <script>
+        document.querySelector(".page").addEventListener('click', function(evt) {
+            const filmImg = evt.target.closest('.filmimg'); // 클릭한 요소가 filmimg인지 확인
+            if (filmImg) {
+                let id = filmImg.getAttribute('data-view'); // 데이터 속성 가져오기
+                const contents = document.querySelectorAll(".content");
+
+                // 모든 콘텐츠 숨기기
+                contents.forEach(content => content.style.display = 'none'); // 숨기기
+
+                // 선택된 콘텐츠 보이기
+                const selectedContent = document.getElementById(id);
+                if (selectedContent) {
+                    selectedContent.style.display = 'block'; // 보이기
+                }
+            }
+        });
+    </script>
+</body>
+</html>

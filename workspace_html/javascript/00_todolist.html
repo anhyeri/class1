@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #list{
+        list-style-type:none;
+        padding:0;
+        }
+        #memo{
+            background-color: rgb(254,190,152);
+            width : 500px;   
+        }
+        #error{
+            color : red;
+            display : none;
+            font-size : 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- todo list
+
+    input, [추가 버튼]
+    □ 전체 선택, [선택 삭제]
+
+    추가 버튼 클릭 시 input의 내용을 console로 출력
+    그 내용을 아래 html 영역에 표시
+    일정한 구조를 가지는 html로 추가
+        - 체크 박스, 내용, 삭제 버튼
+        - 목록의 위 또는 아래 추가 자유롭게 선택
+
+    체크박스에 체크가 되면 할 일에 취소선 표시
+
+    개별 삭제 버튼 클릭 시 그 객체만 삭제
+        - remove()
+
+    전체 삭제 버튼 클릭 시 체크 된 모든 객체 삭제
+
+    기획
+    - 상단에 TODOlist
+    - 입력창과 추가 버튼 (input)
+    - 하단으로 쌓이게
+    - 입력 된 할 일 앞에 체크박스 (완료 시 취소 선)
+    - 선택 삭제 할 수 있는 버튼 / 모두 선택 할 수 있는 버튼 (remove)-->
+
+    <!-- 입력창에 추가한 내용이 아래쪽으로 출력 되게 해야 한다
+    -->
+    
+    <!-- - 상단 이름, 입력창, 추가 버튼 -->
+    <div id = "memo">
+
+        <h1>TODOlist</h1>
+        <input type="text" id = 'todolist' placeholder="오늘의 할 일">
+        <div id = 'error' calss = 'error'>할 일을 입력하세요</div>
+        <button type="button" id = 'add'> 추가 </button>
+        <button type="button" id = 'del'> 삭제 </button>
+        <ul id ="list"></ul>
+    </div>
+    
+
+    <script>
+        document.getElementById('add').addEventListener('click',function(){
+            const tdlist = document.getElementById('todolist');
+            const error  = document.getElementById('error');
+
+            if(tdlist.value.trim()==''){
+                error.style.display = 'block';
+                return;
+            }
+            error.style.display = 'none';            
+
+        const li = document.createElement('li');
+        li.innerHTML = "<input type = checkbox>" + tdlist.value +"<button>삭제</button>";
+    
+        document.getElementById('list').appendChild(li);
+    
+        tdlist.value ='';
+        });
+    
+    </script>
+</body>
+
+</html>
